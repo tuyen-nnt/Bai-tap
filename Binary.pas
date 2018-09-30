@@ -1,6 +1,6 @@
 uses crt;
 type Binary = string[8];
-var n,So1,So2,i:integer;
+var So1,So2:integer;
 function dec2bin(d:integer):Binary;
     var i:integer;
         bin:Binary;
@@ -24,25 +24,32 @@ function n2c(n: integer): char;
     end;
 
 function add(n1,n2: Binary): Binary;
-    var i,r: integer;
+    var i,r1,r2: integer;
         n: Binary;
 
     begin
         n[8] := n2c((c2n(n1[8]) + c2n(n2[8])) mod 2);
-        n[7] := n2c((c2n(n1[7]) + c2n(n2[7]) + c2n(n1[8]) and c2n(n2[8])) mod 2);
-        r:=0;
-        for i:=6 downto 1 do
+        //n[7] := n2c((c2n(n1[7]) + c2n(n2[7]) + c2n(n1[8]) and c2n(n2[8])) mod 2);
+        for i:=7 downto 1 do
           begin
-            if r=2 then r:= r shl 1;
-            r := (c2n(n1[i+1]) + c2n(n2[i+1])) div 2 + r;
-
-            n[i]:= n2c((c2n(n1[i]) + c2n(n2[i]) + r) mod 2);
-
+            //if r=2 then r:= r shl 1;
+            //r := (c2n(n1[i+1]) + c2n(n2[i+1])) div 2 + r;
+            //n[i]:= n2c((c2n(n1[i]) + c2n(n2[i]) + r) mod 2);
+            r1 := c2n(n1[i+1]) and c2n(n2[i+1]);
+            r2 := (c2n(n1[i+1]) or c2n(n2[i+1])) and not(c2n(n[i+1]));
+            n[i] := n2c((c2n(n1[i]) + c2n(n2[i]) + (r1 or r2) mod 2));
 
           end;
         add := n;
     end;
 
+function bin2dec(bin: Binary): integer;
+	begin
+		
+		// TODO
+		
+	end;
+	
 begin
     clrscr;
     write('n1 = ');
