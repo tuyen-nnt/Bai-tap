@@ -35,7 +35,7 @@ function add(n1,n2: Binary): Binary;
 
             r1 := c2n(n1[i+1]) and c2n(n2[i+1]);
             r2 := (c2n(n1[i+1]) or c2n(n2[i+1])) and not(c2n(n[i+1]));
-            n[i] := n2c((c2n(n1[i]) + c2n(n2[i]) + (r1 or r2) mod 2));
+            n[i] := n2c(((c2n(n1[i]) + c2n(n2[i]) + (r1 or r2)) mod 2));
 
           end;
         add := n;
