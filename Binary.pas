@@ -29,12 +29,10 @@ function add(n1,n2: Binary): Binary;
 
     begin
         n[8] := n2c((c2n(n1[8]) + c2n(n2[8])) mod 2);
-        //n[7] := n2c((c2n(n1[7]) + c2n(n2[7]) + c2n(n1[8]) and c2n(n2[8])) mod 2);
+
         for i:=7 downto 1 do
           begin
-            //if r=2 then r:= r shl 1;
-            //r := (c2n(n1[i+1]) + c2n(n2[i+1])) div 2 + r;
-            //n[i]:= n2c((c2n(n1[i]) + c2n(n2[i]) + r) mod 2);
+
             r1 := c2n(n1[i+1]) and c2n(n2[i+1]);
             r2 := (c2n(n1[i+1]) or c2n(n2[i+1])) and not(c2n(n[i+1]));
             n[i] := n2c((c2n(n1[i]) + c2n(n2[i]) + (r1 or r2) mod 2));
@@ -43,13 +41,35 @@ function add(n1,n2: Binary): Binary;
         add := n;
     end;
 
-function bin2dec(bin: Binary): integer;
-	begin
-		
-		// TODO
-		
-	end;
-	
+function sub(n1,n2: Binary): integer;
+    var  i:integer;
+        begin
+         if n2[i]='1' then n2[i]:='0' else n2[i]:='1';
+         add(n1,n2);
+	    end;
+function bin2dec(n:integer): Binary;
+    var S:string[8];
+    A:array[1..8] of integer;
+    N,i,k,mu:integer;
+   begin
+      clrscr;
+      write('Nhap vao xau nhi phan = ');
+      readln(S);
+      For i:=1 to length(s) do
+        begin
+           if S[i]='1' then A[i]:=1 else A[i]:=0;
+        end;
+      N:=0;
+      for i:=1 to length(S) do
+        begin
+           mu:=1;
+           for k:=1 to length(s)-i do mu:=mu*2;
+           N:= N+A[i]*mu;
+        end;
+      write('So thap phan can tim = ',N);
+      readln
+   end;
+ 		
 begin
     clrscr;
     write('n1 = ');
@@ -59,6 +79,10 @@ begin
     writeln('Nhi phan so 1 la ',dec2bin(So1));
     writeln('Nhi phan so 2 la ',dec2bin(So2));
     writeln('n1 + n2 =        ',add(dec2bin(So1),dec2bin(So2)));
+    writeln('n1 - n2 =        ',sub(dec2bin(So1),dec2bin(So2)));
+	nhan:= So1 * So2;
+	chia:= So1 div So2;
+	writeln('n1 * n2 =        ',bin2dec(nhan);
+	writeln('n1 chia n2 =        ',bin2dec(chia);
     readln
 end.
-
