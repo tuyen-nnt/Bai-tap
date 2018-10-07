@@ -1,6 +1,6 @@
 uses crt;
 type Binary = string[8];
-var So1,So2:integer;
+var So1,So2,nhan,chia:integer;
 function dec2bin(d:integer):Binary;
     var i:integer;
         bin:Binary;
@@ -41,13 +41,18 @@ function add(n1,n2: Binary): Binary;
         add := n;
     end;
 
-function sub(n1,n2: Binary): integer;
+function sub(n1,n2: Binary): binary;
     var  i:integer;
+	     A:Binary;
         begin
-         if n2[i]='1' then n2[i]:='0' else n2[i]:='1';
-         add(n1,n2);
+		 for i:=1 to 8 do
+		   begin
+             if n2[i]='1' then A[i]:='0' else A[i]:='1';
+		   end;
+         add(n1,A);
 	    end;
-function bin2dec(n:integer): Binary;
+		
+function bin2dec(bin:integer): Binary;
     var S:string[8];
     A:array[1..8] of integer;
     N,i,k,mu:integer;
@@ -82,7 +87,7 @@ begin
     writeln('n1 - n2 =        ',sub(dec2bin(So1),dec2bin(So2)));
 	nhan:= So1 * So2;
 	chia:= So1 div So2;
-	writeln('n1 * n2 =        ',bin2dec(nhan);
-	writeln('n1 chia n2 =        ',bin2dec(chia);
+	writeln('n1 * n2 =        ',dec2bin(nhan));
+	writeln('n1 / n2 =        ',dec2bin(chia));
     readln
 end.
