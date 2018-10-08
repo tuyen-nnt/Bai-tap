@@ -43,15 +43,42 @@ function add(n1,n2: Binary): Binary;
 
 function sub(n1,n2: Binary): binary;
     var  i:integer;
-	     A:Binary;
-        begin
-		 for i:=1 to 8 do
-		   begin
-             if n2[i]='1' then A[i]:='0' else A[i]:='1';
-		   end;
-         add(n1,A);
-	    end;
-		
+         A,bu2,tru:Binary;
+    begin
+        for i:=8 to 1 do
+          begin
+             if n2 [i]='1' then A[i]:='0' else A[i]:='1';
+	  end;
+        bu2:=add('1',A);
+        bu2:=add(n1,bu2);
+
+        bu2:=add(bu2,'-1');
+        for i:=1 to 8 do
+          begin
+            if bu2[i]='1' then tru[i]:='0' else tru[i]:='1';
+          end;
+        sub:=tru;
+	end;
+
+function multiple(n1,n2:Binary): binary;
+   var i,k,t:integer;
+       n,tich:binary;
+   begin
+    n[1]:= n2c(c2n(n1[1])*c2n(n2[1]));
+    t:= 1;
+    for k:=1 to 8 do
+      begin
+        n[k]:= n2c(c2n(n[k]) shl 1);
+        for i:=1 to 8 do
+          begin
+             n[k]:= n2c(c2n(n2[k])*c2n(n1[i]));
+          end;
+       end;
+    tich:='0';
+    tich:= add(tich,n[k]);
+   end;
+
+
 function bin2dec(bin:integer): Binary;
     var S:string[8];
     A:array[1..8] of integer;
@@ -74,7 +101,7 @@ function bin2dec(bin:integer): Binary;
       write('So thap phan can tim = ',N);
       readln
    end;
- 		
+
 begin
     clrscr;
     write('n1 = ');
@@ -88,6 +115,7 @@ begin
 	nhan:= So1 * So2;
 	chia:= So1 div So2;
 	writeln('n1 * n2 =        ',dec2bin(nhan));
-	writeln('n1 / n2 =        ',dec2bin(chia));
+	 writeln('n1 / n2 =        ',dec2bin(chia));
+        writeln('n1 nhan n2 =        ',multiple(dec2bin(So1),dec2bin(So2)));
     readln
 end.
