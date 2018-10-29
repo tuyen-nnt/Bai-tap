@@ -7,8 +7,10 @@ begin
    until (A >= 1) and (A <= B) and (B <= 200000);
    writeln;
 
-   if (A <= 2) and (B >= 2) then writeln(2);
-   for i:= 2 to B do
+   if (A <= 2) and (B >= 2) then 
+   begin
+     writeln(2);
+     for i:= 2 to B do
        begin
         if odd(i) then
            begin
@@ -20,5 +22,6 @@ begin
               if dem = 0 then writeln(i);
            end;
         end;
-    readln
+    end;
+readln
 end.
